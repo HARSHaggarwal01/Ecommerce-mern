@@ -1,0 +1,60 @@
+[
+    
+    {
+        "id": 1,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    }, {
+        "id": 2,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    }, {
+        "id": 3,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    }, {
+        "id": 4,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    },{
+        "id": 5,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    },{
+        "id": 6,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    },{
+        "id": 7,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    },{
+        "id": 8,
+        "image":"public/assets/img/product/01.png",
+        "name":"Surgical Face Mask",
+        "price":"250.00",
+        "title":"New"
+
+    }
+]
