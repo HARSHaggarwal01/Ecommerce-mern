@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Bannner = () => {
+
   return (
     <div className="small-banner pb-100">
         <div className="container wow fadeInUp" data-wow-delay=".25s">
