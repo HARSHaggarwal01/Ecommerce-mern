@@ -2,12 +2,16 @@ import React from 'react'
 import ProductCard from '../ProductCard'
 import Slider from "react-slick";
 import Data from "../../db/product.json";
+import { useQuery } from '@tanstack/react-query';
+import { BASE_URL,API_URL } from '../../constants/contant';
+import axios from 'axios';
+import ProductCardShimmer from '../ProductCardShimmer';
 
 const Product = ({title}) => {
 
     var settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 5,
         slidesToScroll: 2,
@@ -22,7 +26,12 @@ const Product = ({title}) => {
         ]
     };
 
-    const data = Data;
+    const type = title == "trending" ? 'top_selling':"featured";
+
+    const { data ,isLoading ,isError} = useQuery({
+        queryKey:[`product-data-${title}`],
+        queryFn:()=>axios.get(`${BASE_URL}${API_URL.products}?type=${type}`).then(res=>res.data.data)
+    });
 
     return (
         <div className="product-area pb-100">
@@ -37,19 +46,29 @@ const Product = ({title}) => {
                 </div>
                 <div className="product-wrap item-2 wow fadeInUp" data-wow-delay=".25s">
                     <div className="product-slider owl-carousel owl-theme gap-2">
-                        <Slider {...settings}>
+                        <div className="product-slider-wrap">
                             {
-                                data.map((elem)=>(
-                                    <ProductCard data={elem} />
-                                ))
+                                isLoading ? (
+                                <Slider {...settings}>
+                                    {[...Array(5)].map((_, idx) => <ProductCardShimmer key={idx} />)}
+                                </Slider>
+                                ) : isError ? (
+                                <p>Product Not Found</p>
+                                ) : (
+                                <Slider {...settings}>
+                                    {data.map((item, index) => (
+                                    <ProductCard key={index} data={item} />
+                                    ))}
+                                </Slider>
+                                )
                             }
-                        </Slider>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    )
+    )   
 }
 
 export default Product

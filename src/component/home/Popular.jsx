@@ -2,12 +2,19 @@ import React from 'react'
 import ProductCard from '../ProductCard'
 import ProductData from "../../db/product.json";
 import Slider from "react-slick";
+import { useQuery } from '@tanstack/react-query';
+import { BASE_URL,API_URL } from '../../constants/contant';
+import axios from 'axios';
+import ProductCardShimmer from '../ProductCardShimmer';
+import { useSelector } from 'react-redux';
 
 const Popular = () => {
 
+    const { category } = useSelector((state) => state.category);
+
     var settings = {
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 2,
@@ -39,7 +46,11 @@ const Popular = () => {
         ]
     };
 
-    const category = ["Medicine","Beauty Care","Healthcare","Baby & Mom Care","Food & Nutrition","Medical Equipments"]
+    const { data ,isLoading ,isError} = useQuery({
+        queryKey:[`product-data-popular`],
+        queryFn:()=>axios.get(`${BASE_URL}${API_URL.products}?type=popular`).then(res=>res.data.data)
+    });
+
   return (
     <div className="product-area pb-100">
         <div className="container">
@@ -58,7 +69,7 @@ const Popular = () => {
                                             category?.map((item)=>(
                                                 <li className="nav-item" role="presentation">
                                                     <button className="nav-link" >
-                                                        {item}
+                                                        {item.name}
                                                     </button>
                                                 </li>
                                             ))
@@ -71,13 +82,23 @@ const Popular = () => {
                     <div className="" >
                         <div className="">
                             <div className="row g-3 item-2">
-                                <Slider {...settings}>
+                                <div className="product-slider-wrap">
                                     {
-                                        ProductData.map((item)=>(
-                                            <ProductCard data={item}/>
-                                        ))
+                                        isLoading ? (
+                                        <Slider {...settings}>
+                                            {[...Array(5)].map((_, idx) => <ProductCardShimmer key={idx} />)}
+                                        </Slider>
+                                        ) : isError ? (
+                                        <p>Product Not Found</p>
+                                        ) : (
+                                        <Slider {...settings}>
+                                            {data.map((item, index) => (
+                                            <ProductCard key={index} data={item} />
+                                            ))}
+                                        </Slider>
+                                        )
                                     }
-                                </Slider>
+                                </div>
                             </div>
                         </div>
                     </div>

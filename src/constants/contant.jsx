@@ -9,4 +9,5 @@ export const API_URL = {
     category:"category/list",
     brand:"brand/list",
     banner:"banner/list",
+    products:"frontend/get-products"
 }

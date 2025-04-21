@@ -8,7 +8,7 @@ const Bannner = () => {
             <div className="row g-4">
                 <div className="col-12 col-md-6 col-lg-4">
                     <div className="banner-item">
-                        <img src="public/assets/img/banner/mini-banner-1.jpg" alt="" />
+                        <img src="/public/assets/img/banner/mini-banner-1.jpg" alt="" />
                         <div className="banner-content">
                             <p>Sanitizer</p>
                             <h3>

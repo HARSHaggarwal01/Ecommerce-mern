@@ -1,12 +1,26 @@
 import React from 'react'
 
 const ProductCard = ({data}) => {
+
+    const Rating = ()=> {
+
+        let stars = [];
+        for(var i=0;i<5;i++){
+            stars.push(
+                <i key={i} className={`fa fa-star ${i < data.rating ? 'text-yellow-500' : 'text-secondary'}`} />
+            )
+        }
+        return (
+            <div className="product-rate">{stars}</div>
+        )
+    };
+
   return (
     <div className="product-item me-3">
         <div className="product-img">
-            <span className="type new">{data.title}</span>
+            <span className="type new">{data.product_type ? data.product_type : "new"}</span>
             <a href="shop-single.html">
-                <img src={data.image} alt="" />
+                <img src={data.images && data.images[0] ? data.images[0] : ''} alt="" />
             </a>
             <div className="product-action-wrap">
                 <div className="product-action">
@@ -26,13 +40,7 @@ const ProductCard = ({data}) => {
             <h3 className="product-title">
                 <a href="shop-single.html">{data.name}</a>
             </h3>
-            <div className="product-rate">
-                <i className="fas fa-star" />
-                <i className="fas fa-star" />
-                <i className="fas fa-star" />
-                <i className="fas fa-star" />
-                <i className="fas fa-star" />
-            </div>
+            <Rating />
             <div className="product-bottom">
                 <div className="product-price">
                     <span>${data.price}</span>

@@ -8,7 +8,6 @@ const Category = () => {
     const dispatch = useDispatch();
     const { category } = useSelector((state) => state.category);
 
-    console.log(category,'categories');
     useEffect(()=>{
         dispatch(fetchCategoriesAsync());
     },[]);
