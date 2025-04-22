@@ -9,11 +9,13 @@ import BigBanner from '../../component/home/BigBanner'
 import Brand from '../../component/home/Brand'
 import Video from '../../component/home/Video'
 import ProductWise from '../../component/home/ProductWise'
+import SpeechToText from '../../component/SpeechToText'
 
 const index = () => {
   return (
     <>
         <main className="main">
+        <SpeechToText />
           <Slider />
           <Category />
           <Bannner />

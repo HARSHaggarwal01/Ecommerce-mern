@@ -26,6 +26,30 @@ const Login = () => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
+    const speak = (username) => {
+        const msg = new SpeechSynthesisUtterance(`Hello ${username}, welcome to Future Mart — India’s coolest e-commerce platform!`);
+    
+        const selectVoice = () => {
+            const voices = window.speechSynthesis.getVoices();
+    
+            // Prioritize well-known female voices
+            const preferredVoices = ['samantha', 'google uk english female', 'google us english', 'zira'];
+            const selectedVoice = voices.find(voice =>
+                preferredVoices.some(pref => voice.name.toLowerCase().includes(pref))
+            ) || voices[0];
+    
+            msg.voice = selectedVoice;
+            window.speechSynthesis.speak(msg);
+        };
+    
+        if (window.speechSynthesis.getVoices().length === 0) {
+            window.speechSynthesis.onvoiceschanged = selectVoice;
+        } else {
+            selectVoice();
+        }
+    };
+    
+
     const submitHandler = (e) => {
         e.preventDefault();
         setLoading(true);
@@ -47,6 +71,7 @@ const Login = () => {
             dispatch(setToken(response.data.token));
 
             toast.success(response.data.message);
+            speak('Harsh');
 
             setEmail('');
             setPassword('');
