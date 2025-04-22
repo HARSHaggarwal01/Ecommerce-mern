@@ -15,7 +15,7 @@ const index = () => {
   return (
     <>
         <main className="main">
-        <SpeechToText />
+        {/* <SpeechToText /> */}
           <Slider />
           <Category />
           <Bannner />
